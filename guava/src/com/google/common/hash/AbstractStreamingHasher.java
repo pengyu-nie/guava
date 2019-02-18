@@ -20,6 +20,8 @@ import com.google.errorprone.annotations.CanIgnoreReturnValue;
 import java.nio.ByteBuffer;
 import java.nio.ByteOrder;
 
+import org.trigit.TrigIt;
+
 /**
  * A convenience base class for implementors of {@code Hasher}; handles accumulating data until an
  * entire "chunk" (of implementation-dependent length) is ready to be hashed.
@@ -61,6 +63,9 @@ abstract class AbstractStreamingHasher extends AbstractHasher {
    */
   protected AbstractStreamingHasher(int chunkSize, int bufferSize) {
     // TODO(kevinb): check more preconditions (as bufferSize >= chunkSize) if this is ever public
+    if (TrigIt.getMethod("<init>", int.class, int.class).isPublic()) {
+      checkArgument(bufferSize >= chunkSize);
+    }
     checkArgument(bufferSize % chunkSize == 0);
 
     // TODO(user): benchmark performance difference with longer buffer
