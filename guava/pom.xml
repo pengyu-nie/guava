@@ -47,6 +47,11 @@
       <artifactId>animal-sniffer-annotations</artifactId>
       <version>${animal.sniffer.version}</version>
     </dependency>
+    <dependency>
+      <groupId>org.trigit</groupId>
+      <artifactId>org.trigit.core</artifactId>
+      <version>1.1</version>
+    </dependency>
     <!-- TODO(cpovirk): does this comment belong on the <dependency> in <profiles>? -->
     <!-- TODO(cpovirk): want this only for dependency plugin but seems not to work there? Maven runs without failure, but the resulting Javadoc is missing the hoped-for inherited text -->
   </dependencies>
@@ -167,6 +172,19 @@
             <id>generate-javadoc-site-report</id>
             <phase>site</phase>
             <goals><goal>javadoc</goal></goals>
+          </execution>
+        </executions>
+      </plugin>
+      <plugin>
+        <groupId>org.trigit</groupId>
+        <artifactId>trigit-maven-plugin</artifactId>
+        <version>1.1</version>
+        <executions>
+          <execution>
+            <id>trigit</id>
+            <goals>
+              <goal>evaluate</goal>
+            </goals>
           </execution>
         </executions>
       </plugin>
